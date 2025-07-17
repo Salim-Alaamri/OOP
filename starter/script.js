@@ -24,3 +24,5 @@ Person.prototype.calcAge = function () {
 salim.calcAge();
 
 console.log(salim.__proto__);
+console.log(salim.__proto__.__proto__);
+console.log(salim.__proto__.__proto__.__proto__);
