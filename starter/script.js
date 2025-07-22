@@ -79,4 +79,21 @@ class Device {
 }
 
 const ping = new Device('GH');
-ping.randomIP();
+// ping.randomIP();
+
+
+//object.create : //todo
+
+const PersonProto = {
+  calcAge(){
+    console.log(2025 - this.birthYear);
+  },
+  init(firstName,birthYear) {
+this.firstName=firstName;
+this.birthYear=birthYear;
+  }
+}
+
+const salim = Object.create(PersonProto);
+salim.init('salim',1990);
+salim.calcAge()
