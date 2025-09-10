@@ -1,26 +1,28 @@
 // 'use strict';
 
 class Person {
-  constructor(firstName, birthYear) {
+  constructor(firstName, birthYear, age) {
     this.firstName = firstName;
     this.birthYear = birthYear;
   }
 }
 
 class Student extends Person {
-  constructor(firstName,birthYear){
+  constructor(firstName, birthYear) {
     super(firstName);
-    this.birthYear = birthYear
+    this.birthYear = birthYear;
   }
-  introduce(){
-    console.log(`My name is ${this.firstName}, I was born ${this.birthYear}`);
+
+  introduce() {
+    console.log(
+      `My name is ${this.firstName}, I was born ${this.birthYear} student `
+    );
   }
 }
 
-const sami = new Student('Sami Said', 1992);
+// const sami = new Student('Sami Said', 1992);
 
-sami.introduce()
-
+// sami.introduce();
 
 // const salim = new Person('Salim', 1990);
 // console.log(salim);
@@ -93,29 +95,38 @@ class Device {
   }
 }
 
-
-
 const ping = new Device('GH');
 // ping.randomIP();
 
-
-//object.create : //todo
+////todo===>object.create :
 
 const PersonProto = {
-  calcAge(){
+  calcAge() {
     console.log(2025 - this.birthYear);
   },
-  init(firstName,birthYear) {
-this.firstName=firstName;
-this.birthYear=birthYear;
-  }
-}
+  init(firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  },
+};
 
-const salim = Object.create(PersonProto);
-// salim.init('salim',1990);
-// salim.calcAge()
 
-//todo: >>>>>>         Challenge         
+const StudentProto = Object.create(PersonProto);
+StudentProto.init = function (firstName, birthYear, course) {
+  PersonProto.init.call(this, firstName, birthYear);
+  this.course = course;
+};
+StudentProto.introduce = function () {
+  console.log(
+    `My name is ${this.firstName}, I was born ${this.birthYear} and I am a ${this.course} student `
+  );
+};
+
+const salim = Object.create(StudentProto);
+salim.init('salim', 1990, 'Computer Science');
+salim.introduce();
+salim.calcAge()
+//todo: >>>>>>         Challenge
 // Coding Challenge #3
 
 /* 
@@ -128,4 +139,3 @@ DATA CAR 1: 'Tesla' going at 120 km/h, with a charge of 23%
 
 GOOD LUCK 😀
 */
-
