@@ -110,7 +110,6 @@ const PersonProto = {
   },
 };
 
-
 const StudentProto = Object.create(PersonProto);
 StudentProto.init = function (firstName, birthYear, course) {
   PersonProto.init.call(this, firstName, birthYear);
@@ -125,7 +124,42 @@ StudentProto.introduce = function () {
 const salim = Object.create(StudentProto);
 salim.init('salim', 1990, 'Computer Science');
 salim.introduce();
-salim.calcAge()
+salim.calcAge();
+
+//todo: another class example
+
+class Account {
+  constructor(owner, currency, pin) {
+    this.owner = owner;
+    this.currency = currency;
+    this.pin = pin;
+    this.movements = [];
+    this.locale = navigator.language;
+    console.log(`Thanks for opening an account ${owner}`);
+  }
+  deposit(val) {
+    this.movements.push(val);
+  }
+  withDraw(val) {
+    this.deposit(-val);
+  }
+  approvedLoan(val) {
+    return true;
+  }
+  requestLoan(val) {
+    if (this.approvedLoan(val)) {
+      this.deposit(val);
+      console.log(`${val} ${this.currency} created to your account as a loan`);
+    }
+  }
+}
+
+const acc1 = new Account('Salim', 'OMR', '1111');
+acc1.deposit(150);
+acc1.withDraw(100);
+acc1.requestLoan(2500);
+console.log(acc1);
+
 //todo: >>>>>>         Challenge
 // Coding Challenge #3
 
